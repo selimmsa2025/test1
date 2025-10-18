@@ -1,0 +1,49 @@
+spring:
+  config:
+    import:
+    - application-db.yml #db 정보
+  profiles:
+    active: local #default
+    group:
+      local:
+        - saas-db-local
+      dev:
+        - saas-db-dev
+      prod:
+        - saas-db-prod
+  cloud:
+    config:
+      enabled: false
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+      - local
+      - dev
+      - prod
+  application:
+    name: iop-ci-catalog
+
+system-info: iop-ci-catalog
+
+info:
+  app:
+    name: 카탈로그 서비스 (${spring.profiles.active})
+    description: 카탈로그 관리자 화면, 카탈로그 포탈 이용하거나 관리하기 위한 서비스
+    version: v0.0.1
+
+feign.circuitbreaker.enabled: true
+ 
+---
+## API 테스트 URL 추후 변경
+saas:
+  dev:
+    url: http://localhost:9991 
+  prod:
+    url: http://localhost:9991
+    
+---
+server:
+  port: 9991

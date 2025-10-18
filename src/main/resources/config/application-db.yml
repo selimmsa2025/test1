@@ -1,0 +1,55 @@
+#jenkins JUnit 테스트 
+spring:
+  config:
+    activate:
+      on-profile:
+      - jenkins-junit
+
+#  redis:
+#    host: ENC(Gd8+iDSgwQJEXwWI+5C3TUYldUzYLB49wJ1vE0Ae1Dm3Jo48E/kU9UhFMwGxZBPmcRVGVW8uniOViRDcpN6oOVpTbGa/6hfmUp9dd98SOY4=)
+#    port: 6379
+#    password: ENC(Xs6uYQ8v6cCS1B0UEXYyNUSUcjQdvagy+XwI36+AktPY4mwkQKTUu/DTxgEoZrFQ)
+
+junit-datasource: ENC(uFXj3dEhIhIUwDy/txxseN3Rnpw8d5xKylAcL0y+kUzhioPACKJDxl+ungR28Xy2XPTo6mk6miOYRBTPaklF8+DlhMjQBZduW3GLXU7OOIE=)
+---
+
+#1. SaaS DB local
+spring:
+  config:
+    activate:
+      on-profile:
+      - saas-db-local
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.1.2:5432/postgres
+    username: postgres
+    password: selim0516!
+    #username: ENC(MEKlT1Z0XIsNdQFR2WjkAg8QxCBHWKDw57VwhsLmnVO0xZKfN5JMeKpbvRNEYXH7)
+    #password: ENC(HMB6gcJ1NRb2RTc6yojG6h/kBsn2C3+qm//bfALTFN/L9Hxm9piMnuYlLptFy3al)
+
+---
+#2. SaaS DB dev
+spring:
+  config:
+    activate:
+      on-profile:
+      - saas-db-dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.103.125:13100/DBCOMD
+    username: uscm
+    password: iopCom1!
+    
+---
+#3. SaaS DB prod
+spring:
+  config:
+    activate:
+      on-profile:
+      - saas-db-prod
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.103.125:13100/DBCOMD
+    username: uscm
+    password: iopCom1!
+    

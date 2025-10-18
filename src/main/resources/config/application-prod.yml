@@ -1,0 +1,57 @@
+spring:
+  servlet: 
+    multipart: 
+      location: /data/msa-attach-volume
+      max-file-size: 50MB
+      max-request-size: 50MB 
+
+file:
+  allowed-file-ext: jpg|jpeg|gif|png|bmp|txt|pdf|hwp|hwpx|gul|docx|doc|zip|xls|xlsx|ppt|pptx|mp4|avi|wmv|asf|flv|mov|mkv|mpeg|mpg|3gp|wmv|webm|ogm|asx|m2t|m2ts|mts|tif|tiff|wav|mp3
+  upload-base-path: /data/upload
+  upload-file-path: /file
+  system-file-path: /iop
+  upload-total-size-limit: 52428800 #한번에 올릴수 있는 파일 용량 50MB
+  upload-size-limit: 52428800 #파일 한개당 용량 50메가
+
+logging:
+  config: classpath:config/log/logback-spring.xml
+  file:
+    path: /logs
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, refresh, busrefresh
+
+svc-url:
+  iop:
+    backend:
+      tosaas: iop-ci-tosaas-svc.iop-ci.svc.cluster.local:9993    #. iop-ci-tosaas
+      
+# 웹 서비스 URL
+web-url:
+  protocol: https://
+  iop-ci-catalog:
+    frontend:
+      api: api.test.iop-ci-catalog.go.kr
+
+health:
+  message: hello-${spring.profiles.active} #application.yml
+  
+jwt:
+  secret: mySuperSecretKeyForJWTGenerationChangeThisIsLongEnough123!
+  access-expiration: 600000 #3600000        # 1시간 (밀리초)  60000  10분
+  refresh-expiration: 2592000000    # 30일 (밀리초)
+
+auth:
+  token-secret: iop_cloud_prod
+      
+mybatis:
+  mapper-locations:
+  - classpath*:mapper/**/**_SQL.xml
+  config-location: classpath:mapper/config/mapper-config.xml
+
+saas:
+  prod:
+    url: http://iop-ci-tosaas-svc.iop-ci.svc.cluster.local:9993

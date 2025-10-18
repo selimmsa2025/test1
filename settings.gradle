@@ -1,0 +1,27 @@
+pluginManagement {
+    repositories {
+        maven {
+            url NEXUS_MAVEN_PUBLIC_URL
+            setAllowInsecureProtocol(true)
+            credentials { 
+                username NEXUS_USERNAME
+                password NEXUS_PASSWORD
+            }
+        }
+    }
+}
+dependencyResolutionManagement {
+    repositories {
+        maven {
+            url NEXUS_MAVEN_PUBLIC_URL
+            setAllowInsecureProtocol(true)
+            credentials {
+                username NEXUS_USERNAME
+                password NEXUS_PASSWORD
+            }
+        }
+        
+    }
+}
+
+rootProject.name = 'iop-ci-catalog'
